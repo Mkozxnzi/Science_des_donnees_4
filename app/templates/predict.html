@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prédiction ML</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+<div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <h2>ML Report</h2>
+        <ul>
+            <li><a href="/">Dashboard</a></li>
+            <li><a href="/gradient_boosting.html">🥇 Gradient Boosting</a></li>
+            <li><a href="/random_forest.html">🥈 Random Forest</a></li>
+            <li><a href="/logistic_regression.html">🥉 Logistic Regression</a></li>
+            <li><a href="/pred.html">Test de Prédiction</a></li>
+        </ul>
+    </aside>
+    
+    <div class="main">
+        <h1>Prédiction de la gravité des accidents 🚗</h1>
+
+        <form id="form" action="/predict" method="POST">
+
+        <h3>Choix du modèle</h3>
+
+        <div class="full-width">
+            <label>Modèle utilisé pour le calcul :</label>
+                <select name="model" id="model">
+                    <option value="">-- Sélectionner --</option>
+                    <option value="rf">Random Forest (Forêt Aléatoire)</option>
+                    <option value="lr">Logistic Regression (Linéaire)</option>
+                    <option value="gb">Gradient Boosting (Performant)</option>
+                </select>
+        </div> 
+
+        <h3>Informations sur l'usager</h3>
+
+        <div>
+            <label>Sexe :</label>
+                <select name="sexe" id="sexe">
+                    <option value="">-- Sélectionner --</option>
+                    <option value="1">Masculin</option>
+                    <option value="2">Féminin</option>
+                </select>
+        </div>
+
+        <div class="full-width">
+                <label>Année de naissance :</label>
+                    <input type="number" name="an_nais" id="an_nais" placeholder="Ex : 1995">
+        </div>
+
+        <div>
+            <label>Catégorie usager :</label>
+                <select name="catu" id="catu">
+                    <option value="">-- Sélectionner --</option>
+                    <option value="1">Conducteur</option>
+                    <option value="2">Passager</option>
+                    <option value="3">Piéton</option>
+                </select>
+        </div>
+
+        <h3>Conditions de l'accident</h3>
+
+        <div>
+            <label>Mois de l'année :</label>
+                <select name="mois" id="mois">
+                    <option value="">-- Sélectionner --</option>
+                    <option value="1">Janvier</option>
+                    <option value="2">Février</option>
+                    <option value="3">Mars</option>
+                    <option value="4">Avril</option>
+                    <option value="5">Mai</option>
+                    <option value="6">Juin</option>
+                    <option value="7">Juillet</option>
+                    <option value="8">Août</option>
+                    <option value="9">Septembre</option>
+                    <option value="10">Octobre</option>
+                    <option value="11">Novembre</option>
+                    <option value="12">Décembre</option>
+                </select>
+        </div>
+
+        <div>
+            <label>Heure de l'accident :</label>
+                <input type="time" name="hrmn" id="hrmn">
+        </div>
+
+        <div>
+            <label>Département (Code) :</label>
+                <input type="text" name="dep" id="dep" placeholder="Ex : 06">
+        </div>
+
+        <div>
+            <label>Luminosité :</label>
+                <select name="lum" id="lum">
+                    <option value="">-- Sélectionner --</option>
+                    <option value="1">Plein jour</option>
+                    <option value="2">Crépuscule ou aube</option>
+                    <option value="3">Nuit sans éclairage public</option>
+                    <option value="4">Nuit avec éclairage public non allumé</option>
+                    <option value="5">Nuit avec éclairage public allumé</option>
+                </select>
+        </div>
+
+        <h3>Caractéristiques de la collision</h3>
+
+        <div>
+            <label>Catégorie véhicule :</label>
+                <select name="catv" id="catv">
+                    <option value="">-- Sélectionner --</option>
+                    <option value="0">Indéterminable</option>
+                    <option value="1">Bicyclette</option>
+                    <option value="2">Cyclomoteur &lt; 50 cm³</option>
+                    <option value="7">Voiture légère (VL)</option>
+                    <option value="10">Véhicule utilitaire 1,5T à 3,5T</option>
+                    <option value="13">Poids lourd 3,5T à 7,5T</option>
+                    <option value="14">Poids lourd &gt; 7,5T</option>
+                    <option value="16">Tracteur routier</option>
+                    <option value="20">Engin spécial</option>
+                    <option value="21">Tracteur agricole</option>
+                    <option value="30">Scooter &lt; 50 cm³</option>
+                    <option value="31">Moto 50 à 125 cm³</option>
+                    <option value="32">Scooter 50 à 125 cm³</option>
+                    <option value="33">Moto &gt; 125 cm³</option>
+                    <option value="34">Scooter &gt; 125 cm³</option>
+                    <option value="35">Quad léger</option>
+                    <option value="36">Quad lourd</option>
+                    <option value="37">Autobus</option>
+                    <option value="38">Autocar</option>
+                    <option value="39">Train</option>
+                    <option value="40">Tramway</option>
+                    <option value="50">EDP à moteur</option>
+                    <option value="60">EDP sans moteur</option>
+                    <option value="80">Vélo électrique (VAE)</option>
+                    <option value="99">Autre véhicule</option>
+                </select>
+        </div>
+ 
+        <div class="full-width">
+            <label>Type de collision :</label>
+                <select name="col" id="col">
+                    <option value="">-- Sélectionner --</option>
+                    <option value="-1">Non renseigné</option>
+                    <option value="1">Deux véhicules - frontale</option>
+                    <option value="2">Deux véhicules - par l'arrière</option>
+                    <option value="3">Deux véhicules - par le côté</option>
+                    <option value="4">Trois véhicules et plus - en chaîne</option>
+                    <option value="5">Trois véhicules et plus - collisions multiples</option>
+                    <option value="6">Autre collision</option>
+                    <option value="7">Sans collision</option>
+                </select>
+        </div>  
+        
+        <div class="full-width">
+            <label>Obstacle fixe heurté :</label>
+                <select name="obs" id="obs">
+                    <option value="">-- Sélectionner --</option>
+                    <option value="-1">Non renseigné</option>
+                    <option value="0">Sans objet</option>
+                    <option value="1">Véhicule en stationnement</option>
+                    <option value="2">Arbre</option>
+                    <option value="3">Glissière métallique</option>
+                    <option value="4">Glissière béton</option>
+                    <option value="5">Autre glissière</option>
+                    <option value="6">Bâtiment, mur, pile de pont</option>
+                    <option value="7">Support de signalisation / poste d'appel</option>
+                    <option value="8">Poteau</option>
+                    <option value="9">Mobilier urbain</option>
+                    <option value="10">Parapet</option>
+                    <option value="11">Ilot, refuge, borne haute</option>
+                    <option value="12">Bordure de trottoir</option>
+                    <option value="13">Fossé, talus, paroi rocheuse</option>
+                    <option value="14">Autre obstacle fixe sur chaussée</option>
+                    <option value="15">Autre obstacle fixe sur trottoir / accotement</option>
+                    <option value="16">Sortie de chaussée sans obstacle</option>
+                    <option value="17">Buse / tête d’aqueduc</option>
+                </select>
+        </div>
+        
+        <div>
+            <label>Tracé de la route :</label>
+                <select name="plan" id="plan">
+                    <option value="">-- Sélectionner --</option>
+                    <option value="-1">Non renseigné</option>
+                    <option value="1">Partie rectiligne</option>
+                    <option value="2">Courbe à gauche</option>
+                    <option value="3">Courbe à droite</option>
+                    <option value="4">En S</option>
+                </select>
+        </div>
+        
+            <button type="submit" class="btn-submit">Lancer l'algorithme de prédiction</button>
+
+        </form>
+
+
+
+    </div>
+</div>
+
+<script>
+const form = document.getElementById("form");
+
+form.addEventListener("submit", function(e) {
+
+    let valid = true;
+
+    // Reset erreurs
+    document.querySelectorAll(".error").forEach(el => el.remove());
+    document.querySelectorAll(".input-error").forEach(el => el.classList.remove("input-error"));
+
+    function showError(input, message) {
+        valid = false;
+
+        input.classList.add("input-error");
+
+        const error = document.createElement("div");
+        error.className = "error";
+        error.innerText = message;
+
+        input.parentNode.appendChild(error);
+    }
+
+    // =========================
+    // SELECTS obligatoires
+    // =========================
+    const selects = ["model", "sexe", "catu", "lum", "col", "plan", "obs", "catv", "mois"];
+
+    selects.forEach(id => {
+        const input = document.getElementById(id);
+        if (input.value === "") {
+            showError(input, "Champ obligatoire");
+        }
+    });
+
+    // =========================
+    // Année
+    // =========================
+    const an_nais = document.getElementById("an_nais");
+
+    if (an_nais.value === "") {
+        showError(an_nais, "Champ obligatoire");
+    } else {
+        const year = parseInt(an_nais.value);
+        const currentYear = new Date().getFullYear();
+
+        if (isNaN(year) || year < 1900 || year > currentYear) {
+            showError(an_nais, "Année invalide");
+        }
+    }
+
+    // =========================
+    // Département
+    // =========================
+    const dep = document.getElementById("dep");
+    const value = dep.value.toUpperCase().trim();
+
+    const depRegex = /^(0[1-9]|[1-8][0-9]|9[0-5]|2A|2B|97[1-8]|98[4-9])$/;
+
+    if (value === "") {
+        showError(dep, "Champ obligatoire");
+    } else if (!depRegex.test(value)) {
+        showError(dep, "Ex: 75, 2A, 971...");
+    }
+
+    // =========================
+    // Heure
+    // =========================
+    const hrmn = document.getElementById("hrmn");
+
+    if (hrmn.value === "") {
+        showError(hrmn, "Champ obligatoire");
+    }
+
+    // =========================
+    // STOP SI ERREURS
+    // =========================
+    if (!valid) {
+        e.preventDefault();
+    }
+});
+</script>
+</body>
+</html>
+

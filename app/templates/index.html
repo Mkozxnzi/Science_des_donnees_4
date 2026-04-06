@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>ML Dashboard</title>
+    <link rel="stylesheet" href="../static/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@1.3.0/dist/chartjs-chart-matrix.min.js"></script>
+    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <h2>ML Report</h2>
+        <ul>
+            <li><a href="/">Dashboard</a></li>
+            <li><a href="/gradient_boosting.html">🥇 Gradient Boosting</a></li>
+            <li><a href="/random_forest.html">🥈 Random Forest</a></li>
+            <li><a href="/logistic_regression.html">🥉 Logistic Regression</a></li>
+            <li><a href="/pred.html">Test de Prédiction</a></li>
+        </ul>
+    </aside>
+
+
+    <!-- Main content -->
+    <main class="main">
+
+            
+        <h1>Présentation des modèles</h1>
+        <div class="intro">
+                <h3>Contexte</h3>
+                <div class="intro-content">
+                    <p>
+                        Ce projet vise à prédire la <strong>gravité des accidents de la route</strong> 
+                        à partir de données nationales entre 2014 et 2020 (hors 2019).
+                    </p>
+
+                    <p>
+                        Plusieurs modèles de machine learning ont été entraînés et comparés 
+                        (Random Forest, Gradient Boosting, Régression Logistique), 
+                        avec une attention particulière portée à la <strong>dimension temporelle</strong> des données.
+                    </p>
+
+                    <p>
+                        Les performances sont évaluées via une <strong>validation croisée chronologique</strong>, 
+                        afin de simuler des conditions réelles de prédiction.  
+                        L’objectif est d’identifier les modèles les plus fiables et les facteurs 
+                        influençant la gravité des accidents.
+                    </p>
+                </div>
+                
+            </div>
+
+
+
+        <!-- Graph section -->
+        <div class="grid">
+
+            <div class="box">
+                <h3>Performance du meilleur modèle</h3>
+                <p>Gradient Boosting</p>
+
+                <div class="metrics">
+                    <div class="metric highlight">
+                        <span class="value">80.94%</span>
+                        <span class="label">Score moyen</span>
+                    </div>
+
+                    <div class="metric highlight">
+                        <span class="value">0.40</span>
+                        <span class="label">F1-score</span>
+                    </div>
+
+                    <div class="metric highlight">
+                        <span class="value">31%</span>
+                        <span class="label">Recall</span>
+                    </div>
+                </div>
+
+                
+
+            </div>
+
+
+            <div class="box">
+                <h3>Validation Chronologique</h3>
+                <div class="box-content">
+                    <canvas id="chronoScores"></canvas>
+                </div>
+            </div>
+
+
+            <div class="box">
+                <h3>Comparaison des modèles (accuracy)</h3>
+                <div class="box-content">
+                    <div class="model-row">
+                        <span class="model-name">Gradient Boosting</span>
+                        <span class="accuracy">80.94%</span>
+                        <div class="bar-container">
+                            <div class="bar" style="width: 80.94%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="model-row">
+                        <span class="model-name">Random Forest</span>
+                        <span class="accuracy">80.79%</span>
+                        <div class="bar-container">
+                            <div class="bar" style="width: 80.79%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="model-row">
+                        <span class="model-name">Logistic Regression</span>
+                        <span class="accuracy">80.20%</span>
+                        <div class="bar-container">
+                            <div class="bar" style="width: 80.20%;"></div>
+                        </div>
+                    </div>
+
+                    <small>Scores basés sur la validation croisée chronologique</small>
+                </div>
+            </div>
+
+            <div class="box">
+                <h3>Matrice de confusion</h3>
+                <p>Gradient Boosting</p>
+                <div class="box-content">
+                    <canvas id="confusionMatrix"></canvas>
+                </div>
+            </div>
+
+
+            <div class="box">
+                <h3>Feature importance</h3>
+                <div class="box-content">
+                    <canvas id="featureImportanceChart"></canvas>
+                </div>
+            </div>
+
+
+        </div>
+
+    </main>
+
+</div>
+
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+<script src="../static/script_box.js"></script>
+<script src="../static/script_matrice.js"></script>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    createConfusionMatrix("confusionMatrix", [
+        80860, 4880,
+        13430, 6125
+    ]);
+
+});
+
+
+
+
+const ctxChrono = document.getElementById("chronoScores").getContext("2d");
+
+// Années de test
+const annees_test = [2015, 2016, 2017, 2018, 2020];
+
+// Scores
+const rf_scores = [0.7948, 0.7943, 0.7962, 0.8267, 0.8275];
+const gb_scores = [0.7995, 0.7967, 0.7984, 0.8262, 0.8261];
+const lr_scores = [0.7953, 0.7792, 0.7947, 0.8180, 0.8227]
+
+new Chart(ctxChrono, {
+    type: 'line',
+    data: {
+        labels: annees_test.map(a => a.toString()),
+        datasets: [
+            {
+                label: 'Random Forest',
+                data: rf_scores,
+                borderColor: '#54FFAA',
+                backgroundColor: '#54FFAA33',
+                fill: false,
+                tension: 0.2,
+                pointRadius: 5,
+                pointHoverRadius: 7
+            },
+            {
+                label: 'Gradient Boosting',
+                data: gb_scores,
+                borderColor: '#54AAFF',
+                backgroundColor: '#54AAFF33',
+                fill: false,
+                tension: 0.2,
+                pointRadius: 5,
+                pointHoverRadius: 7
+            },
+            {
+                label: 'Logistic Regression',
+                data: lr_scores,
+                borderColor: '#9C62FC',
+                backgroundColor: '#9C62FC33',
+                fill: false,
+                tension: 0.2,
+                pointRadius: 5,
+                pointHoverRadius: 7
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                labels: {
+                    color: '#ABABAB',
+                    font: { size: 14 }
+                }
+            },
+            tooltip: {
+                callbacks: {
+                    label: ctx => `${ctx.dataset.label} : ${ctx.formattedValue}`
+                }
+            }
+        },
+        scales: {
+            x: {
+                title: {
+                    display: true,
+                    text: 'Année du Test',
+                    color: '#ABABAB',
+                    font: { size: 14 }
+                },
+                ticks: { color: 'white' },
+                grid: { color: '#334155' }
+            },
+            y: {
+                title: {
+                    display: true,
+                    text: 'Accuracy',
+                    color: '#ABABAB',
+                    font: { size: 14 }
+                },
+                min: 0.77,
+                max: 0.83,
+                ticks: {
+                    color: 'white',
+                    stepSize: 0.01,
+                    callback: v => (v*100).toFixed(1) + '%'
+                },
+                grid: { color: '#334155' }
+            }
+        }
+    }
+});
+
+
+
+
+const ctxFI = document.getElementById("featureImportanceChart").getContext("2d");
+
+// Features communes (union)
+const labels = ["catu_3", "catv_33", "dep_75", "obs_2.0", "an_nais", "catv_7", "col_3", "col_6"];
+
+// Gradient Boosting
+const gb_data = [0.092327, 0.091123, 0.088895, 0.067073, 0.064684, 0, 0, 0];
+
+// Random Forest
+const rf_data = [0.077832, 0.083028, 0.070749, 0, 0.079415, 0.060211, 0, 0];
+
+// Logistic Regression
+const lr_data = [0.020010, 0, 0.011738, 0, 0, 0.036529, 0.009437, 0.010308]
+
+new Chart(ctxFI, {
+    type: 'bar',
+    data: {
+        labels: labels,
+        datasets: [
+            {
+                label: 'Gradient Boosting',
+                data: gb_data,
+                backgroundColor: '#54AAFF'
+            },
+            {
+                label: 'Random Forest',
+                data: rf_data,
+                backgroundColor: '#54FFAA'
+            },
+            {
+                label: 'Logistic Regression',
+                data: lr_data,
+                backgroundColor: '#9C62FC'
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                labels: { color: 'white' }
+            }
+        },
+        scales: {
+            x: {
+                ticks: { color: 'white' },
+                grid: { color: '#334155' }
+            },
+            y: {
+                ticks: {
+                    color: 'white',
+                    callback: v => v.toFixed(2)
+                },
+                grid: { color: '#334155' }
+            }
+        }
+    }
+});
+</script>
+
+</body>
+</html>
+

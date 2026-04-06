@@ -1,0 +1,457 @@
+body {
+    margin: 0;
+    font-family: 'Helvetica Neue', sans-serif;
+    background: #0c1323;
+    color: white;
+}
+
+h1 {
+    font-size: 40px;
+    font-weight: 200;
+    letter-spacing: 1px;
+    margin-top: 25px;
+    margin-bottom: 35px;
+}
+
+small {
+    color: #ABABAB;
+    padding: 0px 20px;
+    padding-bottom: 10px;
+}
+
+
+.container {
+    display: flex;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 220px;
+    background: #1e293b;
+    padding: 20px;
+    padding-top: 40px;
+}
+
+
+.sidebar ul {
+    padding-top: 10px;
+    list-style: none;
+    padding-left: 0;
+}
+
+.sidebar li {
+    padding: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    border-radius: 0px;
+}
+
+
+/* --- MAIN --- */
+.main {
+    flex: 1;
+    padding: 20px;
+}
+
+.intro {
+    border: 2px solid #252f41;
+    border-radius: 7px;
+    margin-bottom: 30px;
+    background: #151e2e;
+    width: 100%;
+}
+
+.intro h3 {
+    background: #1e293b;
+    padding: 15px 20px;
+    margin: 0;
+    font-weight: 200;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 20px;
+}
+
+.intro-content {
+    padding: 0px 20px;
+}
+
+.intro-content p {
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+
+
+/* --- GRID --- */
+.grid {
+    position: relative;
+    width: 100%;
+}
+
+
+.box {
+    border: 2px solid #252f41;
+    border-radius: 7px;
+    margin-bottom: 25px;
+    width: 49%; 
+    float: left; /* masonry JS utilise float pour positionner */
+    min-height: 100px;
+    box-sizing: border-box;
+    overflow: hidden;
+    background: #151e2e;
+}
+
+
+/* Titre de la box */
+.box h3 {
+    background: #1e293b;          /* fond du titre */
+    padding: 15px 20px;
+    margin: 0;                      /* pour que le fond couvre toute la largeur */
+    font-weight: 200;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 0;
+    font-size: 20px;
+}
+
+.box p {
+    color: #ABABAB;
+    padding: 0px 20px;
+}
+
+
+/* Layout */
+.metrics {
+    display: flex;
+    gap: 15px;
+    margin: 20px 20px;
+}
+
+/* Chaque bloc */
+.metric {
+    flex: 1;
+    padding: 15px;
+    padding-bottom: 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+/* Encadré individuel */
+.metric.highlight {
+    border: 2px solid #54f9ff;
+    background: #54f9ff22;
+}
+
+/* Valeur */
+.value {
+    font-size: 30px;
+    font-weight: bold;
+    color: #54f9ff;
+}
+
+/* Label */
+.label {
+    font-size: 13px;
+    color: #aaa;
+}
+
+
+
+
+
+/* -- Box comparaison -- */
+.model-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+.box-content {
+    margin: 13px 18px;
+}
+
+.model-name {
+    width: 130px;
+    color: #ABABAB;
+}
+
+.accuracy {
+    width: 60px;
+    text-align: right;
+}
+
+.bar-container {
+    flex: 1;
+    background: #111827;   /* un peu plus foncé que la box */
+    border-radius: 5px;
+    height: 12px;
+    overflow: hidden;
+}
+
+.bar {
+    height: 100%;
+    background: #4a8bf4; 
+    border-radius: 2px;
+}
+
+
+
+canvas {
+    width: 100% !important;
+    height: 250px !important;
+    display: block;
+}
+
+
+/* --- SIDEBAR --- */
+.sidebar a {
+    text-decoration: none;
+    color: white;
+    display: block;
+    font-weight: 200;
+}
+
+.sidebar h2 {
+    font-size: 25px;
+    font-weight: 200;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+}
+
+.sidebar li {
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.sidebar li:hover {
+    background: #334155;
+}
+
+.sidebar .active {
+    background: #334155;
+}
+
+.sidebar li:hover,
+.sidebar .active {
+    background: #334155;
+}
+
+.btn-submit {
+    text-decoration:none;
+    display:inline-block;
+    background:#5390f3;
+    color:white;
+    padding: 10px 20px;
+    border-radius:5px;
+    border: 1px solid #ffffff;
+    margin-bottom: 10px;
+}
+
+.center {
+    margin-top: 8px;
+    text-align: center;
+}
+
+
+/* --- FORMULAIRE DE PRÉDICTION --- */
+
+/* Conteneur interne du formulaire */
+#form {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+/* Style des labels */
+#form label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #ABABAB;
+    font-weight: 300;
+}
+
+/* Style des champs de saisie et selects */
+#form input, 
+#form select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #252f41;
+    background: #111827;
+    color: white;
+    font-size: 15px;
+    box-sizing: border-box; /* Important pour que le padding ne dépasse pas */
+    transition: border-color 0.3s ease;
+}
+
+/* Effet au focus */
+#form input:focus, 
+#form select:focus {
+    outline: none;
+    border-color: #54f9ff;
+}
+
+/* Style du bouton submit */
+#form button {
+    background: #4a8bf4;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background 0.3s ease;
+}
+
+#form button:hover {
+    background: #3b71c8;
+}
+
+/* Affichage du résultat */
+#resultat {
+    margin: 20px;
+    padding: 15px;
+    background: #54f9ff22;
+    border-left: 4px solid #54f9ff;
+    color: #54f9ff;
+    font-size: 16px;
+    font-weight: 300;
+    min-height: 20px;
+}
+/* --- PAGE RÉSULTATS --- */
+
+/* Conteneur pour centrer la carte */
+.result-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* La carte centrale */
+.result-card {
+    background: #1e293b;
+    padding: 40px;
+    padding-bottom: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    border: 1px solid #334155;
+    text-align: center;
+    width: 100%;
+    max-width: 450px;
+}
+
+.icon-header {
+    font-size: 50px;
+    margin-bottom: 10px;
+}
+
+.result-card h2 {
+    color: #fff;
+    font-weight: 300;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+}
+
+/* Badge du modèle */
+.info-group {
+    margin-bottom: 25px;
+}
+
+.model-badge {
+    background: #0f172a;
+    color: #54f9ff;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    border: 1px solid #54f9ff;
+    text-transform: uppercase;
+}
+
+/* Boîte de prédiction */
+.prediction-box {
+    background: #0f172a;
+    padding: 30px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    border-left: 5px solid #54f9ff;
+}
+
+.prediction-value {
+    font-size: 38px;
+    margin: 10px 0 0 0;
+    color: #54f9ff;
+    text-shadow: 0 0 15px rgba(84, 249, 255, 0.4);
+}
+
+/* Bouton retour */
+.btn-back {
+    display: inline-block;
+    text-decoration: none;
+    color: #aaa;
+    font-size: 14px;
+    transition: 0.3s;
+    border: 1px solid #475569;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.btn-back:hover {
+    color: #fff;
+    background: #334155;
+    border-color: #54f9ff;
+}
+
+.label {
+    display: block;
+    color: #94a3b8;
+    font-size: 12px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.error {
+    color: #ff6b6b;
+    font-size: 13px;
+    margin-top: -15px;
+    margin-bottom: 10px;
+}
+
+.input-error {
+    border: 1px solid #ff6b6b !important;
+}
+
+.link-index {
+    color: #ababab;
+}
+
+.params-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin: 15px 15px;
+}
+
+.param {
+    background: #1e293b;
+    padding: 12px;
+    border-radius: 10px;
+}
+
+.param-label {
+    display: block;
+    font-size: 12px;
+    color: #94a3b8;
+}
+
+.param-value {
+    font-size: 16px;
+    font-weight: bold;
+    color: #e2e8f0;
+}

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Résultat de la Prédiction</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+    
+<div class="main">
+    <div class="result-container">
+        <div class="result-card">
+            <div class="icon-header">🚗</div>
+            <h2>Analyse terminée</h2>
+            
+            <div class="info-group">
+                <span class="label">Modèle utilisé :</span>
+                <span class="model-badge">{{ model }}</span>
+            </div>
+
+            <div class="prediction-box">
+                <span class="label">Gravité estimée</span>
+                <h3 class="prediction-value">
+                    {% if prediction == 1 %}
+                        GRAVE
+                    {% else %}
+                        LÉGER
+                    {% endif %}
+                </h3>
+            </div>
+
+            <div class="action-zone">
+                <a href="/pred.html" class="btn-back">🔙 Faire une autre simulation</a>
+            </div>
+            <div class="secondary-link">
+        <a href="/" class="link-index">🏠 Retour au Tableau de bord</a>
+    </div>
+        </div>
+    </div>
+    <div class="intro" style="margin-top:20px;">
+    <h3>Données de la simulation</h3>
+
+<div class="params-grid">
+
+    <!-- Usager -->
+    <div class="param">
+        <span class="param-label">Sexe</span>
+        <span class="param-value">{{ form_data.sexe }}</span>
+        <span id="sexe"></span>
+    </div>
+
+    <div class="param">
+        <span class="param-label">Usager</span>
+        <span class="param-value">{{ form_data.catu }}</span>
+    </div>
+
+    <div class="param">
+        <span class="param-label">Naissance</span>
+        <span class="param-value">{{ form_data.an_nais }}</span>
+    </div>
+
+    <!-- Contexte -->
+    <div class="param">
+        <span class="param-label">Mois</span>
+        <span class="param-value">{{ form_data.mois }}</span>
+    </div>
+
+    <div class="param">
+        <span class="param-label">Heure</span>
+        <span class="param-value">{{ form_data.hrmn }}</span>
+    </div>
+
+    <div class="param">
+        <span class="param-label">Département</span>
+        <span class="param-value">{{ form_data.dep }}</span>
+    </div>
+
+    <div class="param">
+        <span class="param-label">Luminosité</span>
+        <span class="param-value">{{ form_data.lum }}</span>
+    </div>
+
+    <!-- 🚧 Accident -->
+    <div class="param">
+        <span class="param-label">Véhicule</span>
+        <span class="param-value">{{ form_data.catv }}</span>
+    </div>
+
+    <div class="param">
+        <span class="param-label">Collision</span>
+        <span class="param-value">{{ form_data.col }}</span>
+    </div>
+
+    <div class="param">
+        <span class="param-label">Obstacle</span>
+        <span class="param-value">{{ form_data.obs }}</span>
+    </div>
+
+    <div class="param">
+        <span class="param-label">Tracé</span>
+        <span class="param-value">{{ form_data.plan }}</span>
+    </div>
+
+</div>
+</div>
+</div>
+
+</body>
+</html>
