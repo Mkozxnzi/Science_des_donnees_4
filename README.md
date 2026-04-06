@@ -1,4 +1,4 @@
-# 🚦 Prédiction de la Gravité des Accidents  
+# Prédiction de la Gravité des Accidents  
 Application Flask + Machine Learning
 
 Ce projet a pour objectif de **prédire la gravité d’un accident** (*léger* ou *grave*) à partir des données du fichier national d’accidents.  
@@ -10,7 +10,7 @@ Il comprend :
 
 ---
 
-## 📂 Organisation du projet
+## Organisation du projet
 
 ├── data/ <br>
 │   ├── raw/ # Données brutes <br>
@@ -50,7 +50,7 @@ Il comprend :
 
 ---
 
-## ⚙️ Installation
+## Installation
 
 ### 1. Cloner le projet
 ```bash
@@ -71,10 +71,10 @@ python app/app.py
 ```
 ---
 
-## 🌐 Utilisation
+## Utilisation
 Une fois l’application lancée, ouvrir un navigateur et accéder à :
 
-👉 **http://127.0.0.1:5000/** <br>
+**http://127.0.0.1:5000/** <br>
 (ou **http://localhost:5000/** — c’est équivalent)
 
 ### Pages disponibles
@@ -91,9 +91,9 @@ Une fois l’application lancée, ouvrir un navigateur et accéder à :
     - Grave
 ---
 
-## 🧩 Fonctionnement du projet
+## Fonctionnement du projet
 
-### 🔧 Prétraitement des données
+### Prétraitement des données
 
 - Nettoyage et harmonisation des colonnes
 
@@ -105,7 +105,7 @@ Conversion des heures en format numérique (ex : `17:30 → 1730`)
 
 Les données brutes sont stockées dans `data/raw/` et les données prêtes pour le machine learning dans `data/processed/`.
 
-### 🤖 Entraînement des modèles
+### Entraînement des modèles
 
 Les modèles utilisés sont :
 
@@ -123,7 +123,7 @@ python src/train.py
 
 Les modèles entraînés sont sauvegardés dans le dossier `models/` au format `.pkl`, accompagnés de la liste des colonnes utilisées pour l’inférence (afin de garantir la cohérence entre entraînement et prédiction).
 
-### 🌐 Application web (Flask)
+### Application web (Flask)
 
 - L’application Flask se trouve dans `app/app.py`.
 
@@ -143,7 +143,7 @@ Les fichiers statiques (`static/`) gèrent :
 
 ---
 
-## 💡 Remarques
+## Remarques
 
 - Les colonnes non renseignées sont automatiquement gérées par le modèle.
 
@@ -159,6 +159,6 @@ Les fichiers statiques (`static/`) gèrent :
 
 ---
 
-## ✨ Auteurs
+## Auteurs
 
 Projet réalisé par Camille Seveyrat, Melissa Boccaccio et Maxime Bouteyre dans le cadre d’un projet pour l'UE Science des Données 4.
