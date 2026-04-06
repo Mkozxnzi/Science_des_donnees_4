@@ -12,39 +12,39 @@ Il comprend :
 
 ## 📂 Organisation du projet
 
-├── data/
-│   ├── raw/ # Données brutes
-│   └── processed/    # Données nettoyées et prêtes pour le ML
-│
-├── notebooks/
-│   ├── notebook_machine_learning.ipynb
-│   └── notebook_visualisations.ipynb
-│
-├── src/
-│   └── train.py      # Script d'entraînement des modèles
-│
-├── models/ # Tous les modèles sauvegardés
-│   ├── features.pkl
-│   ├── model_gb.pkl
-│   ├── model_lr.pkl
-│   ├── model_rf.pkl
-│
-├── app/
-│   ├── app.py        # Application Flask
-│   ├── templates/ # Pages HTML
-│   │     ├── index.html
-│   │     ├── predict.html
-│   │     ├── resultats.html
-│   │     ├── random_forest.html 
-│   │     ├── logistic_regression.html
-│   │     └── gradient_boosting.html 
-│   │     
-│   ├── static/ # Apparence générale
-│         ├── style.css   
-│         ├── script_box.js        
-│         └── script_matrice.js           
-│
-├── README.md
+├── data/ <br>
+│   ├── raw/ # Données brutes <br>
+│   └── processed/    # Données nettoyées et prêtes pour le ML <br>
+│ <br>
+├── notebooks/ <br>
+│   ├── notebook_machine_learning.ipynb <br>
+│   └── notebook_visualisations.ipynb <br>
+│ <br>
+├── src/ <br>
+│   └── train.py      # Script d'entraînement des modèles <br>
+│ <br>
+├── models/ # Tous les modèles sauvegardés <br>
+│   ├── features.pkl <br>
+│   ├── model_gb.pkl <br>
+│   ├── model_lr.pkl <br>
+│   ├── model_rf.pkl <br>
+│ <br>
+├── app/ <br>
+│   ├── app.py        # Application Flask <br>
+│   ├── templates/ # Pages HTML <br>
+│   │     ├── index.html <br>
+│   │     ├── predict.html <br>
+│   │     ├── resultats.html <br>
+│   │     ├── random_forest.html <br>
+│   │     ├── logistic_regression.html <br>
+│   │     └── gradient_boosting.html <br>
+│   │     <br>
+│   ├── static/ # Apparence générale <br>
+│         ├── style.css   <br>
+│         ├── script_box.js     <br>   
+│         └── script_matrice.js  <br>         
+│ <br>
+├── README.md <br>
 └── requirements.txt
 
 
@@ -54,8 +54,8 @@ Il comprend :
 
 ### 1. Cloner le projet
 ```bash
-git clone <URL_DU_PROJET>
-cd <NOM_DU_REPO>
+git clone https://github.com/Mkozxnzi/Science_des_donnees_4.git
+cd Science_des_donnees_4
 ```
 ### 2. Créer un environnement virtuel et installer les dépendances
 ```bash
@@ -74,7 +74,7 @@ python app/app.py
 ## 🌐 Utilisation
 Une fois l’application lancée, ouvrir un navigateur et accéder à :
 
-👉 **http://127.0.0.1:5000/  **
+👉 **http://127.0.0.1:5000/** <br>
 (ou **http://localhost:5000/** — c’est équivalent)
 
 ### Pages disponibles
@@ -129,7 +129,7 @@ Les modèles entraînés sont sauvegardés dans le dossier `models/` au format `
 
 - Le formulaire de prédiction permet de saisir toutes les informations nécessaires au modèle.
 
-- L’utilisateur peut sélectionner le modèle qu’il souhaite utiliser (si cette option est prévue dans l’interface).
+- L’utilisateur peut sélectionner le modèle qu’il souhaite utiliser.
 
 - Une fois le formulaire validé, l’utilisateur est redirigé vers une page de résultats qui affiche la gravité prédite (*léger* ou *grave*) de manière claire.
 
