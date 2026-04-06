@@ -2,20 +2,26 @@ from flask import Flask, request, jsonify, render_template
 import joblib
 import pandas as pd
 import sklearn
+import os
 
 app = Flask(__name__)
+
+# =============================
+# CHEMINS ROBUSTES POUR RENDER
+# =============================
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+MODEL_DIR = os.path.join(BASE_DIR, "models")
 
 # =============================
 # LOAD MODELS + FEATURES
 # =============================
 models = {
-    "rf": joblib.load("../models/model_rf.pkl"),
-    "lr": joblib.load("../models/model_lr.pkl"),
-    "gb": joblib.load("../models/model_gb.pkl")
+    "rf": joblib.load(os.path.join(MODEL_DIR, "model_rf.pkl")),
+    "lr": joblib.load(os.path.join(MODEL_DIR, "model_lr.pkl")),
+    "gb": joblib.load(os.path.join(MODEL_DIR, "model_gb.pkl"))
 }
 
-features = joblib.load("../models/features.pkl")
-
+features = joblib.load(os.path.join(MODEL_DIR, "features.pkl"))
 
 # =============================
 # ROUTES DE NAVIGATION
@@ -99,10 +105,10 @@ def predict():
     model = models.get(model_choice, models["rf"])
     model_display = model_names.get(model_choice, "Random Forest")
 
-    sexe_map = {
-        "1": "Masculin",
-        "2": "Féminin"
-    }
+    # =========================
+    # DICTIONNAIRES DE LABELS
+    # =========================
+    sexe_map = {"1": "Masculin", "2": "Féminin"}
 
     catu_map = {
         "1": "Conducteur",
@@ -111,18 +117,9 @@ def predict():
     }
 
     mois_map = {
-        "1": "Janvier",
-        "2": "Février",
-        "3": "Mars",
-        "4": "Avril",
-        "5": "Mai",
-        "6": "Juin",
-        "7": "Juillet",
-        "8": "Août",
-        "9": "Septembre",
-        "10": "Octobre",
-        "11": "Novembre",
-        "12": "Décembre"
+        "1": "Janvier", "2": "Février", "3": "Mars", "4": "Avril",
+        "5": "Mai", "6": "Juin", "7": "Juillet", "8": "Août",
+        "9": "Septembre", "10": "Octobre", "11": "Novembre", "12": "Décembre"
     }
 
     lum_map = {
@@ -131,34 +128,6 @@ def predict():
         "3": "Nuit sans éclairage public",
         "4": "Nuit avec éclairage public non allumé",
         "5": "Nuit avec éclairage public allumé"
-    }
-
-    catv_map = {
-        "0": "Indéterminable",
-        "1": "Bicyclette",
-        "2": "Cyclomoteur < 50 cm³",
-        "7": "Voiture légère (VL)",
-        "10": "Véhicule utilitaire 1,5T à 3,5T",
-        "13": "Poids lourd 3,5T à 7,5T",
-        "14": "Poids lourd > 7,5T",
-        "16": "Tracteur routier",
-        "20": "Engin spécial",
-        "21": "Tracteur agricole",
-        "30": "Scooter < 50 cm³",
-        "31": "Moto 50 à 125 cm³",
-        "32": "Scooter 50 à 125 cm³",
-        "33": "Moto > 125 cm³",
-        "34": "Scooter > 125 cm³",
-        "35": "Quad léger",
-        "36": "Quad lourd",
-        "37": "Autobus",
-        "38": "Autocar",
-        "39": "Train",
-        "40": "Tramway",
-        "50": "EDP à moteur",
-        "60": "EDP sans moteur",
-        "80": "Vélo électrique (VAE)",
-        "99": "Autre véhicule"
     }
 
     col_map = {
@@ -170,34 +139,6 @@ def predict():
         "5": "Trois véhicules et plus - collisions multiples",
         "6": "Autre collision",
         "7": "Sans collision"
-    }
-
-    catv_map = {
-        "0": "Indéterminable",
-        "1": "Bicyclette",
-        "2": "Cyclomoteur < 50 cm³",
-        "7": "Voiture légère (VL)",
-        "10": "Véhicule utilitaire 1,5T à 3,5T",
-        "13": "Poids lourd 3,5T à 7,5T",
-        "14": "Poids lourd > 7,5T",
-        "16": "Tracteur routier",
-        "20": "Engin spécial",
-        "21": "Tracteur agricole",
-        "30": "Scooter < 50 cm³",
-        "31": "Moto 50 à 125 cm³",
-        "32": "Scooter 50 à 125 cm³",
-        "33": "Moto > 125 cm³",
-        "34": "Scooter > 125 cm³",
-        "35": "Quad léger",
-        "36": "Quad lourd",
-        "37": "Autobus",
-        "38": "Autocar",
-        "39": "Train",
-        "40": "Tramway",
-        "50": "EDP à moteur",
-        "60": "EDP sans moteur",
-        "80": "Vélo électrique (VAE)",
-        "99": "Autre véhicule"
     }
 
     obs_map = {
@@ -230,6 +171,34 @@ def predict():
         "4": "En S"
     }
 
+    catv_map = {
+        "0": "Indéterminable",
+        "1": "Bicyclette",
+        "2": "Cyclomoteur < 50 cm³",
+        "7": "Voiture légère (VL)",
+        "10": "Véhicule utilitaire 1,5T à 3,5T",
+        "13": "Poids lourd 3,5T à 7,5T",
+        "14": "Poids lourd > 7,5T",
+        "16": "Tracteur routier",
+        "20": "Engin spécial",
+        "21": "Tracteur agricole",
+        "30": "Scooter < 50 cm³",
+        "31": "Moto 50 à 125 cm³",
+        "32": "Scooter 50 à 125 cm³",
+        "33": "Moto > 125 cm³",
+        "34": "Scooter > 125 cm³",
+        "35": "Quad léger",
+        "36": "Quad lourd",
+        "37": "Autobus",
+        "38": "Autocar",
+        "39": "Train",
+        "40": "Tramway",
+        "50": "EDP à moteur",
+        "60": "EDP sans moteur",
+        "80": "Vélo électrique (VAE)",
+        "99": "Autre véhicule"
+    }
+
     # transformer les valeurs en labels
     form_data = {
         "model": model_names.get(data.get("model"), "Non sélectionné"),
@@ -250,8 +219,6 @@ def predict():
     # PRÉDICTION
     # =========================
     prediction = model.predict(input_df)[0]
-
-    print(input_df)  # debug
 
     return render_template(
         "resultats.html",
