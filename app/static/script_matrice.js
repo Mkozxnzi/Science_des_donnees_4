@@ -26,8 +26,20 @@ function createConfusionMatrix(canvasId, values) {
             borderWidth: 2,
             borderRadius: 5,
             borderColor: "white",
-            width: () => 160,
-            height: () => 90
+            width: (ctx) => {
+                const chart = ctx.chart;
+                const area = chart.chartArea;
+                if (!area) return 0; // important !
+                return area.width / 2*0.9; // 2 colonnes
+            },
+            height: (ctx) => {
+                const chart = ctx.chart;
+                const area = chart.chartArea;
+                if (!area) return 0; // important !
+                return area.height / 2*0.9; // 2 lignes
+            },
+        
+
         }]
     };
 
