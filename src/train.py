@@ -145,7 +145,7 @@ features = sorted(colonnes_globales)
 
 output_dir = "../models/"
 
-joblib.dump(pipeline_rf, os.path.join(output_dir, "model_rf.pkl"))
+joblib.dump(pipeline_rf, os.path.join(output_dir, "model_rf.pkl"), compress=3)
 joblib.dump(pipeline_lr, os.path.join(output_dir, "model_lr.pkl"))
 joblib.dump(pipeline_gb, os.path.join(output_dir, "model_gb.pkl"))
 joblib.dump(features, os.path.join(output_dir, "features.pkl"))
