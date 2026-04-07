@@ -94,11 +94,11 @@ y_train = pd.concat([data[a][1] for a in annees_train])
 # =============================
 pipeline_rf = Pipeline([
     ("imputer", SimpleImputer(strategy="mean")),
-    ("model", RandomForestClassifier(
-        n_estimators=200,
-        max_depth=30,
-        min_samples_split=4,
-        min_samples_leaf=2,
+        ("model", RandomForestClassifier(
+        n_estimators=120,
+        max_depth=15,
+        min_samples_split=5,
+        min_samples_leaf=4,
         max_features='sqrt',
         n_jobs=-1,
         random_state=42
