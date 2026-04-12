@@ -171,7 +171,7 @@ Le projet contient également des fichiers (`runtime.txt`, `Procfile`) utilisés
 ---
 
 ## Sources et outils utilisés
-Dans le cadre de ce projet, nous avons ponctuellement utilisé des outils d’assistance tels que Microsoft Copilot et ChatGPT pour nous documenter, explorer différentes approches de code et obtenir des pistes de résolution lors de certaines étapes techniques. <br>
+Dans le cadre de ce projet, nous avons ponctuellement utilisé des outils d’assistance tels que Microsoft Copilot, Gemini et ChatGPT pour nous documenter, explorer différentes approches de code et obtenir des pistes de résolution lors de certaines étapes techniques. <br>
 L’ensemble du développement, des choix méthodologiques et de l’intégration des modèles a été réalisé et validé par les membres du groupe.
 
 ## Auteurs
