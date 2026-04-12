@@ -10,6 +10,12 @@ Il comprend :
 
 ---
 
+## Démo en ligne
+L’application est accessible ici : <br>
+[(https://predicgravacc.onrender.com)](https://predicgravacc.onrender.com)
+
+---
+
 ## Organisation du projet
 
 ├── data/ <br>
@@ -45,8 +51,9 @@ Il comprend :
 │         └── script_matrice.js  <br>         
 │ <br>
 ├── README.md <br>
-└── requirements.txt
-
+├── runtime.txt <br>
+├── requirements.txt <br>
+└── Procfile
 
 ---
 
@@ -156,6 +163,10 @@ Les fichiers statiques (`static/`) gèrent :
     - l’entraînement des modèles,
 
     - l’interface web.
+
+---
+
+Le projet contient également des fichiers ({`runtime.txt`, `Procfile`) utilisés uniquement pour le déploiement sur Render. Ils ne sont pas nécessaires pour une exécution locale.
 
 ---
 
