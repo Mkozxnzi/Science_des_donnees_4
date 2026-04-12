@@ -166,7 +166,7 @@ Les fichiers statiques (`static/`) gèrent :
 
 ---
 
-Le projet contient également des fichiers ({`runtime.txt`, `Procfile`) utilisés uniquement pour le déploiement sur Render. Ils ne sont pas nécessaires pour une exécution locale.
+Le projet contient également des fichiers (`runtime.txt`, `Procfile`) utilisés uniquement pour le déploiement sur Render. Ils ne sont pas nécessaires pour une exécution locale.
 
 ---
 
